@@ -6,7 +6,20 @@ RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get clean && \
     apt-get -q -y update && \
     apt-get -q -y install \
-    git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl
+    git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl wget unzip
+
+## INSTALL JAVA
+RUN apt-get install default-jre -yqq
+
+## INSTALL iceweasel (aka: Firefox)
+RUN apt-get install xvfb iceweasel -yqq
+
+## SET
+RUN Xvfb :99 -ac &
+RUN export DISPLAY=:99
+
+## DOWNLOADING SELENIUM
+RUN wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar && mv selenium-server-standalone-2.53.1.jar /usr/local/bin/selenium-server-standalone-2.53.1.jar
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd
