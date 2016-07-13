@@ -13,11 +13,12 @@ RUN apt-get install default-jre -yqq
 
 ## INSTALL Firefox
 RUN apt-get install xvfb -yqq
-RUN cd /opt && \
-	wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2 && \
-	tar xvjf firefox-45.2.0esr.tar.bz2 && \
-	ln -s /opt/firefox/firefox /usr/bin/firefox && \
-	chmod 755 /usr/bin/firefox
+
+RUN pwd
+RUN wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2
+RUN tar xvjf firefox-45.2.0esr.tar.bz2
+RUN ln -s firefox/firefox /usr/bin/firefox
+RUN chmod 755 /usr/bin/firefox
 
 ## SET
 RUN Xvfb :99 -ac &
