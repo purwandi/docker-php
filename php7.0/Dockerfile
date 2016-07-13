@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get clean && \
     apt-get -q -y update && \
     apt-get -q -y install \
-    git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl wget unzip tar
+    git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl wget unzip tar bzip2
 
 ## INSTALL JAVA
 RUN apt-get install default-jre -yqq
