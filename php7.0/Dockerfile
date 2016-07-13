@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get clean && \
     apt-get -q -y update && \
     apt-get -q -y install \
-    git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl wget unzip
+    git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl wget unzip tar
 
 ## INSTALL JAVA
 RUN apt-get install default-jre -yqq
@@ -14,11 +14,10 @@ RUN apt-get install default-jre -yqq
 ## INSTALL Firefox
 RUN apt-get install xvfb -yqq
 
-RUN pwd
-RUN wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2
-RUN tar xvjf firefox-45.2.0esr.tar.bz2
-RUN ln -s firefox/firefox /usr/bin/firefox
-RUN chmod 755 /usr/bin/firefox
+RUN wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2 && \
+	tar xvjf firefox-45.2.0esr.tar.bz2 && \
+	ln -s firefox/firefox /usr/bin/firefox && \
+    chmod 755 /usr/bin/firefox
 
 ## SET
 RUN Xvfb :99 -ac &
