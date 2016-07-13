@@ -11,8 +11,13 @@ RUN DEBIAN_FRONTEND=noninteractive \
 ## INSTALL JAVA
 RUN apt-get install default-jre -yqq
 
-## INSTALL iceweasel (aka: Firefox)
-RUN apt-get install xvfb iceweasel -yqq
+## INSTALL Firefox
+RUN apt-get install xvfb -yqq
+RUN cd /opt && \
+	wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2 && \
+	tar xvjf firefox-45.2.0esr.tar.bz2 && \
+	ln -s /opt/firefox/firefox /usr/bin/firefox && \
+	chmod 755 /usr/bin/firefox
 
 ## SET
 RUN Xvfb :99 -ac &
