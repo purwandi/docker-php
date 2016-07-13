@@ -20,6 +20,9 @@ RUN ls /opt/firefox
 RUN ln -s /opt/firefox/firefox /usr/bin/firefox
 RUN chmod 755 /usr/bin/firefox
 
+RUN echo '127.0.0.1 tixton.app' >> /etc/hosts
+RUN echo '127.0.0.1 tixton.dev' >> /etc/hosts
+
 ## SET
 RUN Xvfb :99 -ac &
 RUN export DISPLAY=:99
