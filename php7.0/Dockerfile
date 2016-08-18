@@ -11,14 +11,28 @@ RUN DEBIAN_FRONTEND=noninteractive \
 ## INSTALL JAVA
 RUN apt-get install default-jre -yqq
 
-## INSTALL Firefox
+## DISPLAY
 RUN apt-get install xvfb -yqq
 
+## CHROME REQUIREMENT
+RUN apt-get install libpango1.0-0 libxss1 fonts-liberation libindicator7 libpangoxft-1.0-0  libappindicator1 xdg-utils libpangox-1.0-0 -yqq
+
+## INSTALL FIREFOX
 RUN wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2
 RUN tar xvjf firefox-45.2.0esr.tar.bz2 -C /opt
 RUN ls /opt/firefox
 RUN ln -s /opt/firefox/firefox /usr/bin/firefox
 RUN chmod 755 /usr/bin/firefox
+
+## INSTALL CHROME
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg –i google-chrome-stable_current_amd64.deb
+
+## INSTALL CHROME WEB DRIVER
+RUN wget http://chromedriver.storage.googleapis.com/2.23/chromedriver_linux64.zip
+RUN unzip chromedriver_linux64.zip
+RUN mv chromedriver /usr/local/bin/
+RUN chmod 755 /usr/local/bin/chromedriver
 
 RUN echo '127.0.0.1 tixton.app' >> /etc/hosts
 RUN echo '127.0.0.1 tixton.dev' >> /etc/hosts
