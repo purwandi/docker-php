@@ -2,6 +2,14 @@ FROM php:7-fpm
 
 MAINTAINER Purwandi M <free6300@gmail.com>
 
+RUN rm -f /etc/apt/sources.list && touch /etc/apt/sources.list
+RUN echo 'deb http://kambing.ui.ac.id/debian/ jessie main' >> /etc/apt/sources.list
+RUN echo 'deb-src http://kambing.ui.ac.id/debian/ jessie main' >> /etc/apt/sources.list
+RUN echo 'deb http://security.debian.org/ jessie/updates main' >> /etc/apt/sources.list
+RUN echo 'deb-src http://security.debian.org/ jessie/updates main' >> /etc/apt/sources.list
+RUN echo 'deb http://kambing.ui.ac.id/debian/ jessie-updates main' >> /etc/apt/sources.list
+RUN echo 'deb-src http://kambing.ui.ac.id/debian/ jessie-updates main' >> /etc/apt/sources.list
+
 RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get clean && \
     apt-get -q -y update && \
@@ -9,13 +17,16 @@ RUN DEBIAN_FRONTEND=noninteractive \
     git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libpq-dev curl wget unzip tar bzip2
 
 ## INSTALL JAVA
-RUN apt-get install default-jre -yqq
+RUN apt-get install default-jre -y
 
 ## DISPLAY
-RUN apt-get install xvfb -yqq
+RUN apt-get install xvfb -y
 
-## CHROME REQUIREMENT
-RUN apt-get install libdbusmenu-glib4 libdbusmenu-gtk4 libxft2 libpango1.0-0 libxss1 fonts-liberation libindicator7 libpangoxft-1.0-0  libappindicator1 xdg-utils libpangox-1.0-0 -yqq
+## CHROME REQUIREMENT DEBIAN
+RUN apt-get install libdbusmenu-glib4 libdbusmenu-gtk4 libxft2 libpango1.0-0 libxss1 fonts-liberation libindicator7 libpangoxft-1.0-0  libappindicator1 xdg-utils libpangox-1.0-0 -y
+
+## CHROME REQUIREMENT UBUNTU
+# RUN apt-get install libpango1.0-0 libxss1 fonts-liberation libindicator7 libpangoxft-1.0-0  libappindicator1 xdg-utils libpangox-1.0-0 -y
 
 ## INSTALL FIREFOX
 RUN wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2
@@ -26,7 +37,7 @@ RUN chmod 755 /usr/bin/firefox
 
 ## INSTALL CHROME
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg –i google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb
 
 ## INSTALL CHROME WEB DRIVER
 RUN wget http://chromedriver.storage.googleapis.com/2.23/chromedriver_linux64.zip
