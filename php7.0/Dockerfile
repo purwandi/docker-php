@@ -15,7 +15,7 @@ RUN apt-get install default-jre -yqq
 RUN apt-get install xvfb -yqq
 
 ## CHROME REQUIREMENT
-RUN apt-get install libpango1.0-0 libxss1 fonts-liberation libindicator7 libpangoxft-1.0-0  libappindicator1 xdg-utils libpangox-1.0-0 -yqq
+RUN apt-get install libdbusmenu-glib4 libdbusmenu-gtk4 libxft2 libpango1.0-0 libxss1 fonts-liberation libindicator7 libpangoxft-1.0-0  libappindicator1 xdg-utils libpangox-1.0-0 -yqq
 
 ## INSTALL FIREFOX
 RUN wget https://ftp.mozilla.org/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2
