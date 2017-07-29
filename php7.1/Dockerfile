@@ -12,6 +12,7 @@ ENV CHROMEDRIVER_URL_BASE ""
 
 RUN mkdir /provision
 ADD provision /provision
+RUN chmod +x /provision/provision.sh
 RUN /provision/provision.sh
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
