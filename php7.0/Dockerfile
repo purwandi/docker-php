@@ -2,14 +2,6 @@ FROM php:7.0-fpm
 
 MAINTAINER Purwandi M <free6300@gmail.com>
 
-RUN rm -f /etc/apt/sources.list && touch /etc/apt/sources.list
-RUN echo 'deb http://kambing.ui.ac.id/debian/ jessie main' >> /etc/apt/sources.list
-RUN echo 'deb-src http://kambing.ui.ac.id/debian/ jessie main' >> /etc/apt/sources.list
-RUN echo 'deb http://security.debian.org/ jessie/updates main' >> /etc/apt/sources.list
-RUN echo 'deb-src http://security.debian.org/ jessie/updates main' >> /etc/apt/sources.list
-RUN echo 'deb http://kambing.ui.ac.id/debian/ jessie-updates main' >> /etc/apt/sources.list
-RUN echo 'deb-src http://kambing.ui.ac.id/debian/ jessie-updates main' >> /etc/apt/sources.list
-
 RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get clean && \
     apt-get -q -y update && \
