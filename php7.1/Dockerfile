@@ -16,7 +16,7 @@ RUN chmod +x /provision/provision.sh
 RUN /provision/provision.sh
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd pdo_pgsql pdo_mysql mbstring zip xml memcached
+RUN docker-php-ext-install gd pdo_pgsql pdo_mysql mbstring zip xml
 
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
