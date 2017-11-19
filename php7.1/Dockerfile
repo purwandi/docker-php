@@ -18,6 +18,14 @@ RUN /provision/provision.sh
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install exif gd pdo_pgsql pdo_mysql mbstring zip
 
+RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.5.5.tgz' -o xdebug.tar.gz \
+    && mkdir -p xdebug \
+    && tar -xf xdebug.tar.gz -C xdebug --strip-components=1 \
+    && rm xdebug.tar.gz \
+    && ( cd xdebug && phpize && ./configure --enable-xdebug && make -j$(nproc) && make install ) \
+    && rm -r xdebug \
+    && docker-php-ext-enable xdebug
+
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
 ADD ./etc/supervisord.conf /etc/
